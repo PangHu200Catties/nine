@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rent.dao.AuthcodeMapper">
+  <resultMap id="BaseResultMap" type="com.rent.domain.Authcode">
+    <constructor>
+      <idArg column="rid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="username" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="code" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="info1" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="info2" javaType="java.lang.String" jdbcType="CHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    rid, username, code, info1, info2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from authcode
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from authcode
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rent.domain.Authcode">
+    insert into authcode (rid, username, code, 
+      info1, info2)
+    values (#{rid,jdbcType=INTEGER}, #{username,jdbcType=CHAR}, #{code,jdbcType=CHAR}, 
+      #{info1,jdbcType=CHAR}, #{info2,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rent.domain.Authcode">
+    insert into authcode
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        rid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="info1 != null">
+        info1,
+      </if>
+      <if test="info2 != null">
+        info2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=CHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=CHAR},
+      </if>
+      <if test="info1 != null">
+        #{info1,jdbcType=CHAR},
+      </if>
+      <if test="info2 != null">
+        #{info2,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rent.domain.Authcode">
+    update authcode
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=CHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=CHAR},
+      </if>
+      <if test="info1 != null">
+        info1 = #{info1,jdbcType=CHAR},
+      </if>
+      <if test="info2 != null">
+        info2 = #{info2,jdbcType=CHAR},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rent.domain.Authcode">
+    update authcode
+    set username = #{username,jdbcType=CHAR},
+      code = #{code,jdbcType=CHAR},
+      info1 = #{info1,jdbcType=CHAR},
+      info2 = #{info2,jdbcType=CHAR}
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+</mapper>

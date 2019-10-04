@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rent.dao.HouseMapper">
+  <resultMap id="BaseResultMap" type="com.rent.domain.House">
+    <constructor>
+      <idArg column="hid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="uid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="htitle" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="address" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="pic1" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="pic2" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="pic3" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="pic4" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="price" javaType="java.lang.Float" jdbcType="REAL" />
+      <arg column="type" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="lever" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="area" javaType="java.lang.Float" jdbcType="REAL" />
+      <arg column="request" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="info1" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="info2" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="info3" javaType="java.lang.String" jdbcType="CHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    hid, uid, htitle, address, pic1, pic2, pic3, pic4, price, type, lever, area, request, 
+    status, info1, info2, info3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from house
+    where hid = #{hid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from house
+    where hid = #{hid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rent.domain.House">
+    insert into house (hid, uid, htitle, 
+      address, pic1, pic2, pic3, 
+      pic4, price, type, lever, 
+      area, request, status, info1, 
+      info2, info3)
+    values (#{hid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{htitle,jdbcType=CHAR}, 
+      #{address,jdbcType=CHAR}, #{pic1,jdbcType=CHAR}, #{pic2,jdbcType=CHAR}, #{pic3,jdbcType=CHAR}, 
+      #{pic4,jdbcType=CHAR}, #{price,jdbcType=REAL}, #{type,jdbcType=CHAR}, #{lever,jdbcType=INTEGER}, 
+      #{area,jdbcType=REAL}, #{request,jdbcType=CHAR}, #{status,jdbcType=INTEGER}, #{info1,jdbcType=CHAR}, 
+      #{info2,jdbcType=CHAR}, #{info3,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rent.domain.House">
+    insert into house
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hid != null">
+        hid,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="htitle != null">
+        htitle,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="pic1 != null">
+        pic1,
+      </if>
+      <if test="pic2 != null">
+        pic2,
+      </if>
+      <if test="pic3 != null">
+        pic3,
+      </if>
+      <if test="pic4 != null">
+        pic4,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="lever != null">
+        lever,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="request != null">
+        request,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="info1 != null">
+        info1,
+      </if>
+      <if test="info2 != null">
+        info2,
+      </if>
+      <if test="info3 != null">
+        info3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hid != null">
+        #{hid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="htitle != null">
+        #{htitle,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=CHAR},
+      </if>
+      <if test="pic1 != null">
+        #{pic1,jdbcType=CHAR},
+      </if>
+      <if test="pic2 != null">
+        #{pic2,jdbcType=CHAR},
+      </if>
+      <if test="pic3 != null">
+        #{pic3,jdbcType=CHAR},
+      </if>
+      <if test="pic4 != null">
+        #{pic4,jdbcType=CHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="lever != null">
+        #{lever,jdbcType=INTEGER},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=REAL},
+      </if>
+      <if test="request != null">
+        #{request,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="info1 != null">
+        #{info1,jdbcType=CHAR},
+      </if>
+      <if test="info2 != null">
+        #{info2,jdbcType=CHAR},
+      </if>
+      <if test="info3 != null">
+        #{info3,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rent.domain.House">
+    update house
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="htitle != null">
+        htitle = #{htitle,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=CHAR},
+      </if>
+      <if test="pic1 != null">
+        pic1 = #{pic1,jdbcType=CHAR},
+      </if>
+      <if test="pic2 != null">
+        pic2 = #{pic2,jdbcType=CHAR},
+      </if>
+      <if test="pic3 != null">
+        pic3 = #{pic3,jdbcType=CHAR},
+      </if>
+      <if test="pic4 != null">
+        pic4 = #{pic4,jdbcType=CHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="lever != null">
+        lever = #{lever,jdbcType=INTEGER},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=REAL},
+      </if>
+      <if test="request != null">
+        request = #{request,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="info1 != null">
+        info1 = #{info1,jdbcType=CHAR},
+      </if>
+      <if test="info2 != null">
+        info2 = #{info2,jdbcType=CHAR},
+      </if>
+      <if test="info3 != null">
+        info3 = #{info3,jdbcType=CHAR},
+      </if>
+    </set>
+    where hid = #{hid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rent.domain.House">
+    update house
+    set uid = #{uid,jdbcType=INTEGER},
+      htitle = #{htitle,jdbcType=CHAR},
+      address = #{address,jdbcType=CHAR},
+      pic1 = #{pic1,jdbcType=CHAR},
+      pic2 = #{pic2,jdbcType=CHAR},
+      pic3 = #{pic3,jdbcType=CHAR},
+      pic4 = #{pic4,jdbcType=CHAR},
+      price = #{price,jdbcType=REAL},
+      type = #{type,jdbcType=CHAR},
+      lever = #{lever,jdbcType=INTEGER},
+      area = #{area,jdbcType=REAL},
+      request = #{request,jdbcType=CHAR},
+      status = #{status,jdbcType=INTEGER},
+      info1 = #{info1,jdbcType=CHAR},
+      info2 = #{info2,jdbcType=CHAR},
+      info3 = #{info3,jdbcType=CHAR}
+    where hid = #{hid,jdbcType=INTEGER}
+  </update>
+</mapper>
