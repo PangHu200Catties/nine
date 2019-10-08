@@ -1,8 +1,7 @@
 package com.rent.controller;
 
-import com.rent.domain.HousePageBean;
 import com.rent.service.HouseService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.rent.utils.PageBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +23,8 @@ public class HouseController {
 
     @RequestMapping("/hListAll/{page}/{size}")
     @ResponseBody
-    public HousePageBean hListAllHouse(@PathVariable("page") int page,@PathVariable("size") int size){
-        HousePageBean housePageBean = houseService.listAllHouse(page, size);
+    public PageBean hListAllHouse(@PathVariable("page") int page, @PathVariable("size") int size){
+        PageBean housePageBean = houseService.listAllHouse(page, size);
         return housePageBean;
     }
 

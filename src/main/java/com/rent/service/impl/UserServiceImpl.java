@@ -2,6 +2,7 @@ package com.rent.service.impl;
 
 import com.rent.dao.UserMapper;
 import com.rent.dao.UserReponsitory;
+import com.rent.domain.Admin;
 import com.rent.domain.User;
 import com.rent.service.UserService;
 import com.rent.utils.PageBean;
@@ -40,6 +41,7 @@ public class UserServiceImpl implements UserService {
         Page<User> all = userReponsitory.findByUstatus(ustatus,pp);
         PageBean pageBean=new PageBean();
         pageBean.setList(all.getContent());
+        System.out.println(all.getContent());
         pageBean.setTotal(all.getTotalElements());
         return pageBean;
     }

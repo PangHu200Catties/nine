@@ -1,5 +1,6 @@
 package com.rent.service;
 
+import com.rent.domain.Admin;
 import com.rent.domain.User;
 import com.rent.utils.PageBean;
 
@@ -17,4 +18,5 @@ public interface UserService {
     PageBean<User> findBySearch(String search,int ustatus, int currentpage, int pagesize);
 
     PageBean<User> endfindUserByUstatus(int ustatus,int currentPage, int pagesize);
+
 }

@@ -1,6 +1,6 @@
 package com.rent.service;
 
-import com.rent.domain.HousePageBean;
+import com.rent.utils.PageBean;
 
 /**
  * @author: 吴佐彬
@@ -10,6 +10,6 @@ import com.rent.domain.HousePageBean;
  */
 public interface HouseService {
     //分页查所有
-    HousePageBean listAllHouse(int page,int size);
+    PageBean listAllHouse(int page, int size);
 
 }

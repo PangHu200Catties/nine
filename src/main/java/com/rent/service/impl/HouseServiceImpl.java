@@ -2,8 +2,8 @@ package com.rent.service.impl;
 
 import com.rent.dao.HouseMyRepository;
 import com.rent.domain.House;
-import com.rent.domain.HousePageBean;
 import com.rent.service.HouseService;
+import com.rent.utils.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,14 +26,12 @@ public class HouseServiceImpl implements HouseService {
 
 
     @Override
-    public HousePageBean listAllHouse(int page, int size) {
+    public PageBean listAllHouse(int page, int size) {
         PageRequest of = PageRequest.of(page-1, size);
         Page<House> all = houseMyRepository.findAll(of);
-        List<House> content = all.getContent();
-        long totalElements = all.getTotalElements();
-        HousePageBean housePageBean = new HousePageBean();
-        housePageBean.setListHouse(content);
-        housePageBean.setTotal(totalElements);
+        PageBean housePageBean = new PageBean();
+        housePageBean.setList(all.getContent());
+        housePageBean.setTotal(all.getTotalElements());
         return housePageBean;
     }
 }
