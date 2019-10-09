@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
  * @date: 2019/10/7
  * @time: 14:20
  */
+
 @Component
 public interface UserReponsitory extends JpaRepository<User,Integer> {
 

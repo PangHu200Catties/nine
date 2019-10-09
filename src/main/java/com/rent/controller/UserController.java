@@ -107,4 +107,9 @@ public class UserController {
         return "登录失败";
     }
 
+    @RequestMapping("/endfinduserbyid/{uid}")
+    public User endfinduserbyid(@PathVariable("uid") int uid){
+        return userService.endfinduserbyid(uid);
+    }
+
 }

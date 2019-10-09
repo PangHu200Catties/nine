@@ -41,9 +41,13 @@ public class UserServiceImpl implements UserService {
         Page<User> all = userReponsitory.findByUstatus(ustatus,pp);
         PageBean pageBean=new PageBean();
         pageBean.setList(all.getContent());
-        System.out.println(all.getContent());
         pageBean.setTotal(all.getTotalElements());
         return pageBean;
+    }
+
+    @Override
+    public User endfinduserbyid(int uid) {
+        return userReponsitory.findById(uid).get();
     }
 
     @Override
@@ -57,6 +61,7 @@ public class UserServiceImpl implements UserService {
         Page real = userReponsitory.findByRealnameContainingAndUstatus(search,ustatus,pp1);
         PageBean pageBean=new PageBean();
         pageBean.setList(real.getContent());
+        System.out.println(real.getContent());
         pageBean.setTotal(real.getTotalElements());
         return pageBean;
     }

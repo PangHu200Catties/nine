@@ -19,4 +19,5 @@ public interface UserService {
 
     PageBean<User> endfindUserByUstatus(int ustatus,int currentPage, int pagesize);
 
+    User endfinduserbyid(int uid);
 }
