@@ -3,8 +3,10 @@ package com.rent.controller;
 import com.rent.domain.House;
 import com.rent.service.HouseService;
 import com.rent.utils.PageBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,4 +53,16 @@ public class HouseController {
                                         @PathVariable("currentPage")int currentpage,@PathVariable("pagesize")int pagesize){
         return houseService.findBySearch(search,status,currentpage,pagesize);
     }
+
+    @RequestMapping("/findByHid")
+    @ResponseBody
+    public House findByHid(@RequestBody House house){
+        System.out.println(house.getHid());
+        Integer hid=house.getHid();
+        House byHid = houseService.findByHid(hid);
+        System.out.println(byHid);
+        return byHid;
+
+    }
+
 }

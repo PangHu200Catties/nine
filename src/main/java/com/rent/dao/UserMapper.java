@@ -4,7 +4,9 @@ import com.rent.domain.User;
 import com.rent.utils.PageBean;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Integer uid);
 
@@ -19,4 +21,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     PageBean<User> findBySearch(@Param("search") String search,@Param("currentpage") int currentpage, @Param("pagesize") int pagesize);
+
+
 }

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author: 吴佐彬
@@ -70,5 +71,18 @@ public class HouseServiceImpl implements HouseService {
         System.out.println(real.getContent());
         pageBean.setTotal(real.getTotalElements());
         return pageBean;
+    }
+
+
+
+
+    @Override
+    public House findByHid(Integer hid) {
+        Optional<House> byId = houseMyRepository.findById(hid);
+        if (byId.isPresent()) {
+            return byId.get();
+        } else {
+            return null;
+        }
     }
 }

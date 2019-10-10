@@ -112,4 +112,11 @@ public class UserController {
         return userService.endfinduserbyid(uid);
     }
 
+    @RequestMapping("/findByUid")
+    public User findByUid(@RequestBody User user) {
+        Integer uid = user.getUid();
+        System.out.println(user.getUid());
+        User byUid = userService.findByUid(uid);
+        return byUid;
+    }
 }

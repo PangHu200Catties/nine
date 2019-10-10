@@ -1,7 +1,10 @@
 package com.rent.dao;
 
 import com.rent.domain.House;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
+@Mapper
 public interface HouseMapper {
     int deleteByPrimaryKey(Integer hid);
 

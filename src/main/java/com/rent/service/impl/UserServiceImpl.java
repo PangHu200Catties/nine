@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Optional;
 
 /**
  * @author: 陈琪文
@@ -48,6 +49,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User endfinduserbyid(int uid) {
         return userReponsitory.findById(uid).get();
+    }
+
+    @Override
+    public User findByUid(Integer uid) {
+        Optional<User> byId = userReponsitory.findById(uid);
+        if(byId.isPresent()){
+            User user = byId.get();
+            return user;
+        }
+        return null;
     }
 
     @Override
