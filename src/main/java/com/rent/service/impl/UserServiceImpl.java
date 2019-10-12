@@ -42,6 +42,7 @@ public class UserServiceImpl implements UserService {
         Page<User> all = userReponsitory.findByUstatus(ustatus,pp);
         PageBean pageBean=new PageBean();
         pageBean.setList(all.getContent());
+        System.out.println(all.getContent());
         pageBean.setTotal(all.getTotalElements());
         return pageBean;
     }

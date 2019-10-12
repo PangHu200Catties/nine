@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author: 吴佐彬
@@ -33,25 +34,38 @@ public class HouseController {
     //根据出租类型查询并分页展示
     @RequestMapping("/endfindhouse/{status}/{currentPage}/{pagesize}")
     public PageBean<House> endfindHouseByUstatus(@PathVariable("status") int status, @PathVariable("currentPage")int currentpage,
-                                                @PathVariable("pagesize")int pagesize){
-        return houseService.endfindHouseByHstatus(status,currentpage,pagesize);
+                                                 @PathVariable("pagesize")int pagesize, HttpServletRequest request){
+        if(request.getSession().getAttribute("aa")!=null) {
+            return houseService.endfindHouseByHstatus(status, currentpage, pagesize);
+        }
+        return null;
     }
-
+    //删除房屋信息
     @RequestMapping("/enddeletehouse/{hid}")
     public void enddeletehouse(@PathVariable("hid") int hid){
         houseService.enddeletehouse(hid);
     }
-
+    //修改房屋状态
     @RequestMapping("/endupdatebyhouse/{hid}")
     public void endupdatebyhouse(@PathVariable("hid") int hid){
         House hh = houseService.endfindbyhouse(hid);
         hh.setStatus(1);
         houseService.endupdatebyhouse(hh);
     }
+    //房屋模糊查询并分页展示
     @RequestMapping("/endsearchhouse/{search}/{status}/{currentPage}/{pagesize}")
     public PageBean<House> endsearchhouse(@PathVariable("search")String search,@PathVariable("status")int status,
-                                        @PathVariable("currentPage")int currentpage,@PathVariable("pagesize")int pagesize){
-        return houseService.findBySearch(search,status,currentpage,pagesize);
+                                        @PathVariable("currentPage")int currentpage,@PathVariable("pagesize")int pagesize,
+                                          HttpServletRequest request){
+        if(request.getSession().getAttribute("aa")!=null) {
+            return houseService.findBySearch(search, status, currentpage, pagesize);
+        }
+        return null;
+    }
+    //根据id查询房屋所以信息
+    @RequestMapping("/endfindpicbyhid/{hid}")
+    public House endfindpicbyhid(@PathVariable("hid") int hid){
+        return houseService.endfindbyhouse(hid);
     }
 
     @RequestMapping("/findByHid")
