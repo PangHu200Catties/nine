@@ -4,11 +4,13 @@ import com.rent.dao.HouseMyRepository;
 import com.rent.domain.House;
 import com.rent.service.HouseService;
 import com.rent.utils.PageBean;
+import com.rent.utils.UploadUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +27,8 @@ public class HouseServiceImpl implements HouseService {
 
     @Autowired
     private HouseMyRepository houseMyRepository;
-
+    @Autowired
+    private UploadUtils uploadUtils;
 
     @Override
     public PageBean listAllHouse(int page, int size) {
@@ -84,5 +87,34 @@ public class HouseServiceImpl implements HouseService {
         } else {
             return null;
         }
+    }
+    @Override
+    public List<House> findAll() {
+        return houseMyRepository.findAll();
+    }
+
+
+    @Override
+    public House selectById(House house) {
+        Optional<House> byHid = houseMyRepository.findById(house.getHid());
+        if (byHid.isPresent()) {
+            House house1 = byHid.get();
+            return house1;
+        }
+        return null;
+    }
+
+
+    @Override
+    public void updateData(House house) {
+    /*    String path = "";
+        if (file != null && file.getOriginalFilename() != "") {
+            path = uploadUtils.upload(file);
+            house.setPic1(path);
+        }*/
+       /* String path = "";
+        path = uploadUtils.upload(file);
+        house.setPic1(path);*/
+        houseMyRepository.saveAndFlush(house);
     }
 }

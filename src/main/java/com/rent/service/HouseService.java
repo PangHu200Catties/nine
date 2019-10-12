@@ -2,6 +2,9 @@ package com.rent.service;
 
 import com.rent.domain.House;
 import com.rent.utils.PageBean;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * @author: 吴佐彬
@@ -13,6 +16,11 @@ public interface HouseService {
     //分页查所有
     PageBean listAllHouse(int page, int size);
 
+    public List<House> findAll();
+
+    House selectById(House house);
+
+    void updateData(House house);
     PageBean<House> endfindHouseByHstatus(int status, int currentpage, int pagesize);
 
     void enddeletehouse(int hid);
