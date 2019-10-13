@@ -77,5 +77,8 @@ public class UserServiceImpl implements UserService {
         pageBean.setTotal(real.getTotalElements());
         return pageBean;
     }
-
+    @Override
+    public User findByUsername(String username) {
+        return userReponsitory.findByUsername(username);
+    }
 }

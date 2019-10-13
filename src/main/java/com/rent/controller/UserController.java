@@ -37,18 +37,6 @@ public class UserController {
     @Autowired
     private SysUserService sysUserService;
 
-    //登录验证
-    /*@RequestMapping("/endlogin")
-    public String endlogin(@RequestBody Admin admin,HttpServletRequest request ){
-        Admin aa = adminService.findByAusernameAndByApassword(admin);
-        if(aa==null){
-            return "{\"topage\": \"end_login\",\"alertto\": \"登录失败\"}";
-        }else {
-            HttpSession session=request.getSession();
-            session.setAttribute("aa",aa);
-            return "{\"topage\": \"end_index\",\"alertto\": \"登录成功\"}";
-        }
-    }*/
     //登录用户信息
     @RequestMapping("/endfindusername")
     public String endfindusername(HttpServletRequest request ){
@@ -65,6 +53,23 @@ public class UserController {
         HttpSession session=request.getSession();
         session.removeAttribute("token");
     }
+    //登录用户信息
+    @RequestMapping("/findusername")
+    public String findusername(HttpServletRequest request ){
+        HttpSession session=request.getSession();
+        SysUser aa = (SysUser)session.getAttribute("userToken");
+        if(aa!=null){
+            return userService.findByUsername(aa.getLoginName()).getNickname();
+        }
+        return "登录";
+    }
+    //注销
+    @RequestMapping("/loginout")
+    public void loginout(HttpServletRequest request ){
+        HttpSession session=request.getSession();
+        session.removeAttribute("userToken");
+    }
+
     //根据用户类型查询并分页展示
     @RequestMapping("/endfinduser/{ustatus}/{currentPage}/{pagesize}")
     public PageBean<User> endfindUserByUstatus(@PathVariable("ustatus") int ustatus,@PathVariable("currentPage")int currentpage,
@@ -100,9 +105,10 @@ public class UserController {
         UsernamePasswordToken userToken=new UsernamePasswordToken(sysUser.getLoginName(),sysUser.getPassword());
         try{
             subject.login(userToken);
-            if(subject.isAuthenticated()&1==sysUser1.getStatus()){
-                /*HttpSession session=request.getSession();
-                session.setAttribute("userToken",userToken);*/
+            if(subject.isAuthenticated() && 1==sysUser1.getStatus()){
+
+                HttpSession session=request.getSession();
+                session.setAttribute("userToken",sysUser);
                 return "登录成功";
             }else{
                 return "登录失败";
@@ -127,7 +133,7 @@ public class UserController {
             subject.login(token);
             if(subject.isAuthenticated()&&2==sysUser1.getStatus()){
                 HttpSession session=request.getSession();
-                session.setAttribute("token",token);
+                session.setAttribute("token",sysUser);
                 return "登录成功";
             }else{
                 return "登录失败";

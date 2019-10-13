@@ -3,6 +3,7 @@ package com.rent.service;
 import com.rent.domain.Admin;
 import com.rent.domain.User;
 import com.rent.utils.PageBean;
+import netscape.security.Principal;
 
 /**
  * @author: 陈琪文
@@ -21,4 +22,6 @@ public interface UserService {
 
     User endfinduserbyid(int uid);
     User findByUid(Integer uid);
+
+    User findByUsername(String username);
 }

@@ -20,5 +20,5 @@ public interface UserReponsitory extends JpaRepository<User,Integer> {
     Page<User> findByRealnameContainingAndUstatus(String realname,int ustatus,Pageable pageable);
 
     Page<User> findByUstatus(int ustatus,Pageable pageable);
-
+    User findByUsername(String username);
 }
