@@ -231,4 +231,25 @@
       info3 = #{info3,jdbcType=CHAR}
     where hid = #{hid,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByAddress" resultType="com.rent.domain.House" parameterType="com.rent.utils.PageBean">
+    select * from house
+    <where>
+      <if test="address!=null and address!=''">
+        address like concat('%',#{address},'%')
+      </if>
+    </where>
+    limit #{page},#{size}
+
+  </select>
+  <select id="countHouseByAddress" parameterType="com.rent.utils.PageBean" resultType="int">
+    select count(*) from house
+    <where>
+      <if test="address!=null and address!=''">
+        address like concat('%',#{address},'%')
+      </if>
+
+    </where>
+
+  </select>
 </mapper>

@@ -40,6 +40,13 @@ public class HouseController {
         PageBean housePageBean = houseService.listAllHouse(page, size);
         return housePageBean;
     }
+    @RequestMapping("/hSearch")
+    @ResponseBody
+    public PageBean listHouses(@RequestBody PageBean pageBean){
+
+        System.out.println(pageBean);
+        return houseService.ListHouseByAddress(pageBean);
+    }
     //根据出租类型查询并分页展示
     @RequestMapping("/endfindhouse/{status}/{currentPage}/{pagesize}")
     public PageBean<House> endfindHouseByUstatus(@PathVariable("status") int status, @PathVariable("currentPage")int currentpage,

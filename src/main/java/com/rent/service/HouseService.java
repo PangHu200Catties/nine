@@ -30,5 +30,7 @@ public interface HouseService {
     void endupdatebyhouse(House hh);
 
     PageBean<House> findBySearch(String search, int status, int currentpage, int pagesize);
+    PageBean ListHouseByAddress(PageBean pageBean);
+
     House findByHid(Integer hid);
 }

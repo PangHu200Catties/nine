@@ -14,4 +14,8 @@ import java.util.List;
 public class PageBean<T> {
     private List<T> list;
     private long total;
+
+    private int page;
+    private  int size;
+    private String address;
 }

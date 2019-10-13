@@ -1,5 +1,6 @@
 package com.rent.service.impl;
 
+import com.rent.dao.HouseMapper;
 import com.rent.dao.HouseMyRepository;
 import com.rent.domain.House;
 import com.rent.service.HouseService;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +31,8 @@ public class HouseServiceImpl implements HouseService {
     private HouseMyRepository houseMyRepository;
     @Autowired
     private UploadUtils uploadUtils;
-
+    @Autowired
+    private HouseMapper houseMapper;
     @Override
     public PageBean listAllHouse(int page, int size) {
         PageRequest of = PageRequest.of(page-1, size);
@@ -116,5 +119,28 @@ public class HouseServiceImpl implements HouseService {
         path = uploadUtils.upload(file);
         house.setPic1(path);*/
         houseMyRepository.saveAndFlush(house);
+    }
+    @Override
+    public PageBean ListHouseByAddress(PageBean pageBean) {
+        int currentIdex = (pageBean.getPage()-1)*pageBean.getSize();
+        pageBean.setPage(currentIdex);
+//        List<House> list=new ArrayList<>();
+//        int sum=0;
+//        if(pageBean.getAddress()!=null && pageBean.getAddress() != ""){
+//
+//            String[] addr = pageBean.getAddress().split(" ");
+//            for (String s : addr) {
+//                pageBean.setAddress(s);
+                List<House> list = houseMapper.selectByAddress(pageBean);
+                int total = houseMapper.countHouseByAddress(pageBean);
+//                list.addAll(houses);
+//                sum+=total;
+//            }
+            System.out.println(pageBean+"///+-+-+-+-+-+-+-+-+");
+            pageBean.setList(list);
+            pageBean.setTotal(total);
+            return pageBean;
+
+
     }
 }

@@ -109,7 +109,7 @@ public class UserController {
 
                 HttpSession session=request.getSession();
                 session.setAttribute("userToken",sysUser);
-                return "登录成功";
+                return sysUser.getLoginName();
             }else{
                 return "登录失败";
             }
