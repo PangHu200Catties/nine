@@ -22,5 +22,5 @@ public interface HouseMapper {
     int updateByPrimaryKey(House record);
     List<House> selectByAddress(PageBean pageBean);
 
-    int countHouseByAddress(PageBean pageBean);
+    int  countHouseByAddress(PageBean pageBean);
 }
